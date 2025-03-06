@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đăng Nhập</title>
+    <title>Đăng Ký</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -11,7 +11,7 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        background: #ffffff;
+        background: #fdfdfd;
         color: white;
         text-align: center;
         padding: 50px;
@@ -22,7 +22,7 @@
         justify-content: center;
         align-items: center;
       }
-      #form-login {
+      #form-register {
         min-width: 400px;
         background: rgba(0, 0, 0, 0.8);
         padding: 30px 30px 40px;
@@ -42,7 +42,7 @@
         align-items: center;
       }
       .form-group i {
-        color: #fff;
+        color: rgb(247, 247, 247);
         margin-right: 10px;
       }
       .form-input {
@@ -66,12 +66,6 @@
         color: #0c0202;
         background: #f5f5f5;
       }
-      .error-message {
-        color: red;
-        font-size: 14px;
-        margin-top: 10px;
-        display: none;
-      }
       p {
         margin-top: 20px;
       }
@@ -91,13 +85,13 @@
   </head>
   <body>
     <div id="wrapper">
-      <form id="form-login">
-        <h1 class="form-heading">Đăng Nhập</h1>
+      <form id="form-register">
+        <h1 class="form-heading">Đăng Ký</h1>
         <div class="form-group">
           <i class="fa-solid fa-user"></i>
           <input
             type="text"
-            id="login-username"
+            id="username"
             class="form-input"
             placeholder="Tên Đăng Nhập"
           />
@@ -106,36 +100,35 @@
           <i class="fa-solid fa-key"></i>
           <input
             type="password"
-            id="login-password"
+            id="password"
             class="form-input"
             placeholder="Mật Khẩu"
           />
         </div>
-        <input type="submit" value="Đăng Nhập" class="form-submit" />
-        <p class="error-message" id="error-message">
-          ⚠ Sai tài khoản hoặc mật khẩu!
-        </p>
-        <p>Chưa có tài khoản? <a href="dangki.html">Đăng ký</a></p>
+        <input type="submit" value="Đăng Ký" class="form-submit" />
+        <p>Đã có tài khoản? <a href="index.html">Đăng nhập</a></p>
       </form>
     </div>
 
     <script>
       document
-        .getElementById("form-login")
+        .getElementById("form-register")
         .addEventListener("submit", function (event) {
           event.preventDefault(); // Ngăn chặn gửi form mặc định
-          let username = document.getElementById("login-username").value;
-          let password = document.getElementById("login-password").value;
-          let savedUsername = localStorage.getItem("username");
-          let savedPassword = localStorage.getItem("password");
-          let errorMessage = document.getElementById("error-message");
+          let username = document.getElementById("username").value;
+          let password = document.getElementById("password").value;
 
-          if (username === savedUsername && password === savedPassword) {
-            alert("Đăng nhập thành công!");
-            window.location.href = "demo.html"; // Chuyển đến trang chủ
-          } else {
-            errorMessage.style.display = "block";
+          if (username === "" || password === "") {
+            alert("Vui lòng nhập đầy đủ thông tin!");
+            return;
           }
+
+          // Lưu vào localStorage
+          localStorage.setItem("username", username);
+          localStorage.setItem("password", password);
+
+          alert("Đăng ký thành công! Hãy đăng nhập.");
+          window.location.href = "index.html"; // Chuyển đến trang đăng nhập
         });
     </script>
   </body>
